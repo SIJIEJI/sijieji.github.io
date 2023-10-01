@@ -228,6 +228,27 @@ input, select, textarea {
 			font-size: 1.25em;
 		}
 
+		.hover-image {
+			position: relative;
+			display: inline-block;
+		}
+		.hover-image .hover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+		.hover-image:hover .hover {
+			opacity: 1;
+		}
+		.col-8 li {
+			display: none;
+		  }
+		  .col-8 li:nth-child(-n+9) {
+			display: list-item;
+		  }
+
 /* Container */
 
 	.container {
@@ -1679,6 +1700,51 @@ input, select, textarea {
 			.image.centered img {
 				margin: 0 auto;
 				width: auto;
+			}
+
+			#publications-images {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				margin-top: 20px;
+			}
+
+			#publications-images div {
+				width: 30%;
+				position: relative;
+				margin-bottom: 20px;
+			}
+
+			#publications-images div:nth-child(3n+3) {
+				margin-right: 0; /* 添加这一行 */
+			}
+
+			#publications-images div:nth-child(-n+2) {
+				margin-bottom: 10px; /* 添加这一行 */
+			}
+
+			#publications-images img {
+				width: 100%;
+			}
+
+			.badge {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				background-color: #EA8A95;
+				color: white;
+				padding: 5px;
+				border-radius: 5px;
+
+			}
+
+			.rounded {
+				border-radius: 10px;
+				transition: transform 0.2s ease-in-out;
+			}
+
+			.rounded:hover {
+				transform: scale(1.1);
 			}
 
 /* Button */
