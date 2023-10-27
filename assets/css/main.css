@@ -1733,9 +1733,9 @@ input, select, textarea {
 				left: 0px;
 				background-color: #EA8A95;
 				color: white;
-				padding: 5px;
-				border-radius: 5px;
-
+				padding: 3px;
+				border-radius: 2px;
+				text-shadow: none; /* 添加这一行 */
 			}
 
 			.rounded {
