@@ -1707,6 +1707,7 @@ input, select, textarea {
 				flex-wrap: wrap;
 				justify-content: space-between;
 				margin-top: 20px;
+				display: inline-block;
 			}
 
 			#publications-images div {
@@ -1724,23 +1725,26 @@ input, select, textarea {
 			}
 
 			#publications-images img {
-				width: 100%;
+				width: 90%;
+				
 			}
 
 			.badge {
 				position: absolute;
-				top: 0px;
-				left: 0px;
+				top: 0;
+				left: 0;
 				background-color: #EA8A95;
 				color: white;
 				padding: 3px;
-				border-radius: 2px;
+				border-radius: 3px;
 				text-shadow: none; /* 添加这一行 */
+				z-index: 1000;
 			}
 
 			.rounded {
 				border-radius: 10px;
 				transition: transform 0.2s ease-in-out;
+				margin-top: 0;
 			}
 
 			.rounded:hover {
