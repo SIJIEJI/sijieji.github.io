@@ -1638,7 +1638,7 @@ input, select, textarea {
 /* Section/Article */
 
 	section, article {
-		margin-bottom: 3em;
+		margin-bottom: 0em;
 	}
 
 	section > :last-child,
