@@ -41,11 +41,6 @@ a:hover{color:#FFFFFF}
 .rov .rise{animation:rov-rise .9s cubic-bezier(.2,.7,.2,1) both}
 .rov .hl{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 96%;background-size:100% .07em;animation:rov-sweep 1.1s cubic-bezier(.65,0,.35,1) both}
 .rov .scroll{animation:rov-scroll 26s linear infinite}
-.rov .signal-panel{box-sizing:border-box;width:min(1440px,calc(100vw - 48px));margin-left:calc((100% - min(1440px,calc(100vw - 48px)))/2);scrollbar-width:thin;scrollbar-color:#3A4A6B #0A101D}
-.rov .signal-panel svg{min-width:1320px}
-.rov .signal-scroll-hint{display:none;margin:10px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:1.5;color:#8E9AB5}
-@media (max-width:1368px){.rov .signal-scroll-hint{display:block}}
-@media (max-width:800px){.rov .signal-panel{width:100%;margin-left:0}.rov .signal-panel svg{min-width:1120px}}
 .rov .ring{transform-box:fill-box;transform-origin:center;animation:rov-ring 2.8s cubic-bezier(.2,.6,.3,1) infinite}
 .rov .ring.lag{animation-delay:1.4s}
 .rov .pulse{animation:rov-pulse 2.4s ease-in-out infinite}
@@ -138,7 +133,7 @@ a:hover{color:#FFFFFF}
 @keyframes rov-halo3{0%,38%{transform:scale(1.35);opacity:.25}50%,82%{transform:scale(.7);opacity:.7}100%{transform:scale(1.35);opacity:.25}}
 @keyframes rov-tws{0%,18%{opacity:1}20%,98%{opacity:.34}100%{opacity:1}}
 @media (max-width:900px){.rov .grid3{grid-template-columns:repeat(1,minmax(0,1fr)) !important}}
-@media (max-width:700px){.rov .signal-panel svg{height:auto !important}.rov .hide-sm{display:none}}
+@media (max-width:700px){.rov .panel svg{height:320px !important}.rov .hide-sm{display:none}}
 @media (prefers-reduced-motion:reduce){
 .rov *{animation:none !important;transition:none !important}
 .rov .is-pending .rv{opacity:1;transform:none}
@@ -193,7 +188,7 @@ Your browser does not support audio playback. <a href="./How_Physical_AI_Decodes
 </audio>
 </aside>
 
-<div class="panel rise signal-panel" role="region" aria-label="Animated physiological signals" aria-describedby="signal-scroll-hint" tabindex="0" style="margin-top: 52px; border: 1px solid #1A2338; border-radius: 16px; background: #0A101D; overflow-x: auto; overflow-y: hidden; animation-delay: 1.3s">
+<div class="panel rise" style="margin-top: 52px; border: 1px solid #1A2338; border-radius: 16px; background: #0A101D; overflow: hidden; animation-delay: 1.3s">
 <svg viewBox="0 0 1320 440" preserveAspectRatio="xMinYMid slice" role="img" aria-label="Schematic: bioelectrical, biomechanical and ambient, and biochemical channels drop out or carry artifacts; a personalized physiological state estimate carries uncertainty that widens where evidence is missing, and feeds back to request the next observation or a reference measurement." font-family="'JetBrains Mono', ui-monospace, monospace" style="display: block; width: 100%; height: auto">
 <defs><clipPath id="rov-clip"><rect x="0" y="46" width="960" height="370"></rect></clipPath></defs>
 <rect x="18" y="48" width="1160" height="104" rx="8" fill="#0C1426"></rect>
@@ -310,7 +305,6 @@ Your browser does not support audio playback. <a href="./How_Physical_AI_Decodes
 </svg>
 </div>
 
-<p id="signal-scroll-hint" class="signal-scroll-hint">Scroll horizontally to explore the full signal animation.</p>
 <p class="rise" style="margin: 14px 0 0; max-width: 1040px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; line-height: 1.65; color: #8E9AB5; animation-delay: 1.6s">Schematic. Bioelectrical, biomechanical and ambient, and biochemical channels drop out or carry artifacts. The personalized state x̂<sub>i</sub>(t) carries uncertainty that widens where evidence is missing, and the model feeds back to request the next observation or a reference measurement.</p>
 
 <nav aria-label="Research thrusts" class="rise" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; animation-delay: 1.8s">
