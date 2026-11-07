@@ -1,384 +1,254 @@
 # AI for Bio
 
-## Foundations, Debugging and Biology-Inspired Intelligence
+**Build AI. Debug It. Advance It Through Biology.**
 
-Proposed course by Sijie Ji · Curriculum version: November 1, 2026. This is a course design, not an announced institutional offering. Calendar dates, course number, credits and enrollment arrangements are to be set by the host institution. The schedule, labs and grading below are proposed.
+Proposed 14-week interdisciplinary course designed by Sijie Ji (November 2026).
 
-## Course description
+**Audience:** Upper-level undergraduate and early graduate students in Biology, Bioengineering, BME, Neuroscience and Computer Science.  
+**Format:** Two 75-minute classes and one 90-minute studio per week; approximately 5–7 hours of independent work.  
+**Entry expectations:** Basic Python, introductory statistics, vectors, derivatives and basic biology. Prior ML coursework is not required.  
+**Course status:** Proposed design, not an offered class.
 
-AI for Bio connects the foundations of machine learning with the systems that biology studies: systems that sense, adapt, regulate and learn. Students build models, diagnose their failures and evaluate what their outputs mean scientifically. A second direction asks how biological principles can become testable ideas for better AI.
+## Teaching purpose
 
-Biology and AI have a productive, two-way relationship. The course treats biological inspiration as a source of explicit hypotheses, not as proof that an algorithm reproduces biological intelligence.
+Students learn to construct and debug AI models, draw appropriately limited conclusions from biological data, and turn biological mechanisms into falsifiable algorithmic ideas. *Biology → AI* and *AI → Biology* are distinct but mutually enriching directions. Biological analogies are not, by themselves, evidence of mechanistic equivalence.
 
-## Learning outcomes
+## Measurable learning outcomes
 
-1. Formulate a biological, physiological, behavioral or cognitive question as a learning problem with explicit measurements, targets and assumptions.
+1. Translate a biological, physiological, behavioral or cognitive question into explicit measurements, labels and assumptions.
+2. Derive and implement a small neural network and compare it with an appropriate statistical baseline.
+3. Diagnose optimization, data-processing and evaluation failures through controlled experiments.
+4. Design subject-, batch- or time-aware evaluations and assess uncertainty under distribution shift.
+5. Translate a justified biological mechanism into an algorithmic hypothesis and test an ablation.
+6. Model hidden physiological states, noisy observations and the cost of additional measurements in a toy system.
+7. Communicate reproducible results and distinguish analogy, prediction, mechanism and causal evidence.
 
-2. Derive and implement a small neural network, explain its loss and gradients, and compare it with a suitable statistical baseline.
+## Four phases
 
-3. Diagnose training, data and evaluation failures through controlled experiments and interpretable debugging evidence.
+- **Weeks 1–5 · Understand & debug AI (Foundations):** Formalize biological questions; build models; diagnose leakage, optimization and evaluation failures. **Student output:** A validated baseline and an evidence-based debugging dossier.
+- **Weeks 6–9 · Learn design principles from biology (Biology → AI):** Translate feedback, structure and memory into computational hypotheses; test them against controls. **Student output:** A biological mechanism-to-algorithm map and controlled ablation.
+- **Weeks 10–12 · Understand human measurements (AI → Biology):** Model context, hidden states, personalization and the value of further sensing. **Student output:** A state estimator and cost-aware sensing analysis, with stated limits.
+- **Weeks 13–14 · Defend a scientific claim (Synthesis):** Reproduce a result, challenge a shortcut and communicate both positive and negative evidence. **Student output:** A reproducible capstone and individual oral defense.
 
-4. Design leakage-aware evaluation across people, batches and time, and quantify uncertainty and failure under distribution shift.
+## Weekly syllabus
 
-5. Translate a biological mechanism into a computational hypothesis, implement a model change and test it with an ablation.
+### Week 01 · A shared language for biology and AI (Foundations)
 
-6. Build and critically assess a small dynamical model that connects sensing, hidden states and adaptive measurement.
+**Driving question:** What is learned, what is measured, and what is assumed?
 
-7. Communicate reproducible results with a clear distinction between prediction, mechanism, analogy and causal evidence.
+- **Class A:** Translate biological questions into measurable inputs, targets, prediction times, and units of analysis. Separate explanatory aims from predictive tasks.
+- **Class B:** Learning, optimization and inductive bias. Introduce neural computation, adaptation and feedback as productive—but limited—analogies.
+- **Studio / experiment:** Audit a small synthetic dataset for units, missingness, repeated subjects, and uncertain labels; write a data dictionary.
+- **Reading / preparation:** ISLP, statistical learning overview; scikit-learn, common pitfalls.
+- **Due / checkpoint:** Ungraded readiness check and a one-page scientific problem formulation.
 
-## Format and policies
+### Week 02 · From measurements to learnable data (Foundations)
 
-### Preparation and access
+**Driving question:** Could a model learn the experiment rather than the biology?
 
-Designed for upper-level undergraduates and early graduate students in biology, bioengineering, BME, neuroscience or CS. Basic Python, introductory probability/statistics and familiarity with vectors, derivatives and basic biology are expected. Prior ML is not required. A preparatory Python/NumPy and linear-algebra refresher is recommended; students can take either a biological or computational role while rotating responsibilities.
+- **Class A:** Sampling, sensor noise, biological variability, acquisition artifacts and nuisance variables in signals, images and molecular measurements.
+- **Class B:** Train/validation/test sets; participant-, batch- and time-aware splits; preprocessing learned only from training data.
+- **Studio / experiment:** Compare sample-random and subject-held-out splits on repeated synthetic measurements. Trace identity shortcuts and leakage.
+- **Reading / preparation:** scikit-learn, common pitfalls; featured subject-leakage demonstration.
+- **Due / checkpoint:** Data audit and split manifest for formative feedback.
 
-### Weekly rhythm and tools
+### Week 03 · Build a model you can explain (Foundations)
 
-Proposed 14-week format: two 75-minute class meetings and one 90-minute studio each week, plus about 5–7 hours of independent work. Use Python, NumPy, pandas, matplotlib, scikit-learn and PyTorch in Jupyter. Core assignments use small CPU-friendly synthetic data; a GPU and paid AI subscription are not required. Official credits and workload must be set by the host institution.
+**Driving question:** What can a strong baseline teach us before deep learning?
 
-### Assessment and collaboration
+- **Class A:** Linear/logistic regression, loss functions, regularization, simple derivatives and one gradient update.
+- **Class B:** Gradient descent, scaling, convergence diagnostics and an illustrative dose-response fitting task without mechanistic overclaiming.
+- **Studio / experiment:** Start Lab 1: implement a small multilayer perceptron in NumPy and compare gradients with autograd.
+- **Reading / preparation:** ISLP, regression and classification; PyTorch, tensors and optimization.
+- **Due / checkpoint:** Concept check 1 (5%): loss, gradients, appropriate prediction targets.
 
-Four labs contribute 40%; four individual concept checks contribute 20%; the staged capstone contributes 35%; participation and peer review contribute 5%. Labs may be completed in pairs with individual debugging reflections. Capstones use teams of 2–3 with explicit roles and an individual defense. Participation can be demonstrated through written review as well as discussion.
+### Week 04 · Train, inspect, debug (Foundations)
 
-### AI tools and academic integrity
+**Driving question:** Why can a model appear successful and still be wrong?
 
-Generative tools may be used for explanation and coding assistance when disclosed. Submit a short record of material use, verify generated code and citations, and explain every submitted component. Individual concept checks and oral defenses are completed without generative assistance. Never upload restricted data to an external tool. Evaluation rewards justified decisions and evidence; model output alone is not evidence.
+- **Class A:** Backpropagation, activation functions, learning curves, underfitting and overfitting; compare a network with a regularized baseline.
+- **Class B:** Diagnose label mistakes, learning-rate instability, preprocessing leakage and train/evaluation-mode errors.
+- **Studio / experiment:** Complete Lab 1: reproduce planted failures, state a hypothesis, change one factor, and document before/after evidence.
+- **Reading / preparation:** PyTorch tutorials; scikit-learn, leakage and reproducibility.
+- **Due / checkpoint:** Lab 1 (10%): first neural network and debugging dossier.
 
-### Data and reproducibility
+### Week 05 · Evaluate a scientific claim (Foundations)
 
-Default to synthetic or appropriately licensed public data. Keep subjects, experimental batches and future observations separated as required by the question. Document data versions, licenses, seeds, preprocessing, splits and software dependencies. PTB-XL is optional: follow its source documentation, patient-level folds and citation requirements. No new human-subject data collection is required.
+**Driving question:** What result would change your interpretation?
 
-### Feedback and inclusion
+- **Class A:** Class imbalance, precision/recall, AUROC/AUPRC, regression errors and matching metrics to scientific questions.
+- **Class B:** Grouped cross-validation, calibration, uncertainty, and participant-level resampling. Discuss why discrimination does not imply usefulness.
+- **Studio / experiment:** Review a small public ECG dataset case and its documentation; design a patient-aware evaluation. No model training on private data.
+- **Reading / preparation:** ISLP, resampling; PTB-XL documentation and recommended patient-level folds.
+- **Due / checkpoint:** Capstone proposal (5%): biological question, proposed mechanism, baseline, split, metric and feasibility.
 
-Use a diagnostic readiness check, weekly low-stakes feedback and scheduled project checkpoints. As a proposed default, allow three 24-hour grace days across lab submissions; arrange other extensions with the instructor. Provide accessible notebooks, readable figures, written alternatives to live participation and accommodations under the host institution’s process. Meeting times, office hours and institutional policies will be specified for an actual offering.
+### Week 06 · Feedback as a computational design principle (Biology → AI)
 
-## Assessment
+**Driving question:** Can homeostasis inspire robust computational rules?
 
-| Component | Weight | Timing |
-| --- | ---: | --- |
-| Labs 1–4 | 40% | Weeks 4, 7, 10, 12; 10% each |
-| Individual concept checks | 20% | Weeks 3, 6, 9, 12; 5% each |
-| Capstone | 35% | Weeks 5, 8, 11, 13, 14 |
-| Participation and peer review | 5% | Throughout the term |
+- **Class A:** Biological negative feedback, state variables, observation variables, differential equations, equilibria and local stability; use a simplified gene circuit.
+- **Class B:** Abstract feedback into a transparent controller or adaptive correction term; state the hypothesized robustness gain and possible failure conditions.
+- **Studio / experiment:** Start Lab 2: simulate gene regulation, apply a disturbance, and compare feedback against a matched no-feedback design.
+- **Reading / preparation:** Uri Alon, An Introduction to Systems Biology, selected feedback chapters; introductory ODE notes.
+- **Due / checkpoint:** Concept check 2 (5%): states, observations, stability and biological analogy.
 
-Lab rubric (each lab): implementation and model understanding 30%; debugging and controlled checks 30%; valid evaluation 25%; interpretation and reproducibility 15%. Concept checks assess derivation, diagnosis and scientific interpretation. Participation is assessed through substantive feedback, preparation and peer audits.
+### Week 07 · Mechanistic priors and model mismatch (Biology → AI)
 
-## Weekly schedule
+**Driving question:** When does a biological constraint help—and when does it hurt?
 
-Weekly preparation below names available external readings or a specific mathematical preparation task. Lecture notes, assignment starter notebooks and solutions are planned teaching materials, not included in this syllabus release.
+- **Class A:** Black-box, mechanistic and hybrid models; constraints and inductive biases that are motivated by evidence rather than convenience.
+- **Class B:** Identifiability, sensitivity analysis, model mismatch, hypothesis-driven ablation and what a good prediction does not establish.
+- **Studio / experiment:** Complete Lab 2: fit the toy system to noisy trajectories; ablate the feedback term; challenge it using a deliberately wrong prior.
+- **Reading / preparation:** Uri Alon, selected regulatory-circuit examples; ISLP, regularization and model selection.
+- **Due / checkpoint:** Lab 2 (10%): algorithmic hypothesis, matched baseline, perturbation and mismatch analysis.
 
-### Week 01 — A shared language for biology and AI
+### Week 08 · Biological organization and learned representations (Biology → AI)
 
-**Module:** Foundations
+**Driving question:** Can modularity or invariance motivate a useful model design?
 
-**Guiding question:** What is learned, what is measured, and what is assumed?
+- **Class A:** Biological organization at different scales; modular responses, stability and context-dependence. Explicitly distinguish phenomena from computation analogies.
+- **Class B:** Representation learning and invariance: PCA, simple autoencoders and modular feature groups. Propose one biologically motivated design constraint.
+- **Studio / experiment:** Compare a simple shared representation with a structured representation on simulated multimodal measurements; ablate the constraint under a context shift.
+- **Reading / preparation:** ISLP, unsupervised learning; a short instructor-provided note on biological modularity and testable inductive bias.
+- **Due / checkpoint:** Capstone baseline (5%): runnable code, split manifest and initial failure analysis.
 
-**Class A:** Turn a biological question into inputs, targets, a prediction time and a unit of analysis. Separate a scientific explanation from a predictive association.
+### Week 09 · Memory and continual adaptation (Biology → AI)
 
-**Class B:** Introduce learning, optimization and inductive bias through neural computation, adaptation and feedback. Identify where each analogy breaks.
+**Driving question:** Can a memory-inspired rule reduce forgetting?
 
-**Studio:** Audit a small synthetic dataset for missing values, units, repeated subjects and unreliable labels; write a data dictionary.
+- **Class A:** Biological memory and stability–plasticity as inspiration; limitations of mapping neural/immune memory to machine learning.
+- **Class B:** Catastrophic forgetting, rehearsal/replay, regularization and retention–adaptation tradeoffs. Match model capacity, examples and compute.
+- **Studio / experiment:** Start Lab 3: train on sequential synthetic environments; compare fine-tuning with replay and a frozen reference.
+- **Reading / preparation:** Kirkpatrick et al. (2017), Overcoming catastrophic forgetting in neural networks; reading on biological analogy limits.
+- **Due / checkpoint:** Concept check 3 (5%): adaptation, retention, controls and negative results.
 
-**Preparation:** ISLP: statistical learning overview; scikit-learn: common pitfalls.
+### Week 10 · Personalization, behavior and context (AI → Biology)
 
-**Due / checkpoint:** Ungraded readiness check and a one-page problem formulation.
+**Driving question:** Is the model tracking physiology or a change in context?
 
-### Week 02 — From measurements to learnable data
+- **Class A:** Between-person differences, within-person change, behavioral proxies, missing modalities, confounding and measurement context.
+- **Class B:** Population vs personalized models; establish a calibration period; evaluate on later observations and on held-out environments.
+- **Studio / experiment:** Complete Lab 3: test context shortcuts, quantify forgetting, and report matched resource costs and multiple random seeds.
+- **Reading / preparation:** Kirkpatrick et al.; scikit-learn, leakage and evaluation protocols.
+- **Due / checkpoint:** Lab 3 (10%): adaptation/retention curves, context audit and compute accounting.
 
-**Module:** Foundations
+### Week 11 · Modeling hidden physiological states (AI → Biology)
 
-**Guiding question:** Could the model learn the experiment instead of the biology?
+**Driving question:** What can incomplete sensor measurements actually identify?
 
-**Class A:** Sampling, noise, artifacts, feature construction and nuisance variables in signals, images and molecular measurements.
+- **Class A:** States, dynamics and observation pathways. Introduce linear state-space models, sensing noise and partial observability.
+- **Class B:** Filtering, uncertainty and the limitations of physiological interpretation. A toy state estimator is not by itself a clinical digital twin.
+- **Studio / experiment:** Start Lab 4: simulate hidden physiological states and noisy sensors; implement a provided Kalman-filter scaffold and direct regression baseline.
+- **Reading / preparation:** Särkkä & Svensson, Bayesian Filtering and Smoothing (selected sections); linear-state equations.
+- **Due / checkpoint:** Capstone mechanism test (10%): ablation, sensitivity analysis and claim–evidence table.
 
-**Class B:** Train/validation/test roles; subject-, batch- and time-aware splitting; preprocessing fit only on training data.
+### Week 12 · Active sensing: measure, predict, decide (AI → Biology)
 
-**Studio:** Compare a sample-random split with a subject-held-out split on synthetic repeated measurements. Check subject ID and acquisition-order shortcuts.
+**Driving question:** When is another observation worth its cost?
 
-**Preparation:** scikit-learn: inconsistent preprocessing, data leakage and controlling randomness.
+- **Class A:** Uncertainty-aware measurement selection, missing observations, acquisition cost, and periodic, random vs adaptive sampling.
+- **Class B:** Prediction versus intervention; simulation assumptions; why improved state estimation does not establish clinical benefit.
+- **Studio / experiment:** Complete Lab 4: compare filtering error, uncertainty and sensing cost at matched budgets; introduce model mismatch and sensor dropout.
+- **Reading / preparation:** Särkkä & Svensson, selected filtering sections; course notes on active sensing controls.
+- **Due / checkpoint:** Lab 4 (10%): state estimation and sensing policy. Concept check 4 (5%).
 
-**Due / checkpoint:** Data audit and split manifest for feedback; no graded submission.
+### Week 13 · Trustworthy biological AI (Synthesis)
 
-### Week 03 — Build a model you can explain
+**Driving question:** Can another team reproduce and challenge your result?
 
-**Module:** Foundations
+- **Class A:** Prediction versus explanation; uncertainty, fairness, data privacy and scientifically defensible conclusions.
+- **Class B:** Generative assistants and foundation models: transfer, contamination, hallucination, and unverified biological claims.
+- **Studio / experiment:** Peer audit another team’s code and documentation; identify an overlooked shortcut or alternative explanation.
+- **Reading / preparation:** Dataset and model documentation used in the capstone; scikit-learn, common pitfalls.
+- **Due / checkpoint:** Capstone reproducible report (10%): six pages, code, environment, data provenance and limitations.
 
-**Guiding question:** What does a useful baseline tell us before deep learning?
+### Week 14 · Biology-to-AI Innovation Challenge (Synthesis)
 
-**Class A:** Linear and logistic regression, loss functions, decision boundaries and regularization; derive a gradient update.
+**Driving question:** Did the biological idea improve an algorithm—and how do we know?
 
-**Class B:** Gradient descent, scaling and optimization diagnostics. Connect parameter fitting to a simple biological dose-response example without claiming mechanism.
+- **Class A:** Team presentations: biological mechanism → algorithmic hypothesis → implementation → ablation → evidence and limits.
+- **Class B:** Individual oral defense: explain a failure, a competing explanation, an unsupported claim and the next useful experiment.
+- **Studio / experiment:** Capstone symposium and cross-disciplinary review. Well-supported negative results count as scientific progress.
+- **Reading / preparation:** Peer project reports; no additional required readings.
+- **Due / checkpoint:** Presentation and individual oral defense (5%); submit a contribution statement.
 
-**Studio:** Start Lab 1: implement a small multilayer perceptron and gradient updates in NumPy, then compare with autograd.
+## Four laboratories (40% of the total grade)
 
-**Preparation:** ISLP: regression and classification; PyTorch: tensors, autograd and optimization.
+### Lab 01 · Train and Debug Your First Neural Network (Weeks 3–4, 10%)
 
-**Due / checkpoint:** Concept check 1 (5%): loss, gradients and prediction tasks.
+**Data/context:** Synthetic labeled measurements with repeated subjects.
 
-### Week 04 — Train, inspect, debug
+- **Build:** Implement a two-layer neural network, check gradients numerically, and benchmark against a linear model.
+- **Test and debug:** Diagnose a mis-set learning rate, incorrect labels and preprocessing leakage using controlled repairs.
+- **Deliver:** Notebook, split manifest, learning curves and a two-page debugging dossier.
 
-**Module:** Foundations
+### Lab 02 · From Biological Feedback to a Robust Computational Rule (Weeks 6–7, 10%)
 
-**Guiding question:** Why can a model look successful and still be wrong?
+**Data/context:** Toy gene-expression dynamics with controlled perturbations.
 
-**Class A:** Backpropagation, activation functions, underfitting, overfitting and learning curves; compare a neural network with a regularized baseline.
+- **Build:** Abstract negative feedback into an explicit computational rule; compare with a no-feedback baseline.
+- **Test and debug:** Ablate feedback gain, perturb the dynamics and test when the assumed mechanism is wrong.
+- **Deliver:** Equations, simulation code, matched controls, perturbation plots and a claim–evidence table.
 
-**Class B:** Diagnose shape/label errors, unstable learning rates, preprocessing leakage and train/evaluation mode mistakes.
+### Lab 03 · Memory-Inspired Learning under Change (Weeks 9–10, 10%)
 
-**Studio:** Complete Lab 1: reproduce planted failures, form a diagnosis, change one factor at a time and document the repair.
+**Data/context:** Sequential synthetic environments with context shifts.
 
-**Preparation:** ISLP: deep learning; PyTorch: building a model and optimization; scikit-learn: leakage.
+- **Build:** Compare frozen models, fine-tuning and a memory-inspired replay strategy with equal training budgets.
+- **Test and debug:** Quantify retention, adaptation, context shortcuts and resource costs across random seeds.
+- **Deliver:** Retention/adaptation curves, ablation, resource accounting and reproducible configuration.
 
-**Due / checkpoint:** Lab 1 (10%): first neural network and debugging dossier.
+### Lab 04 · Hidden-State Estimation and Active Sensing (Weeks 11–12, 10%)
 
-### Week 05 — Evaluate a scientific claim
+**Data/context:** Simulated physiological states and noisy observations.
 
-**Module:** Foundations
+- **Build:** Estimate latent states with a provided linear-filter scaffold; compare direct prediction and adaptive sensing policies.
+- **Test and debug:** Hold out trajectories, control measurement budget, test sensor dropout and state-model mismatch.
+- **Deliver:** State/observation equations, estimation errors, uncertainty coverage, sensing-cost analysis and limitations.
 
-**Guiding question:** What evidence would change your conclusion?
+**Common laboratory rubric:** Implementation and understanding 30%; debugging and controlled tests 30%; valid evaluation 25%; interpretation and reproducibility 15%.
 
-**Class A:** Class imbalance, confusion matrices, precision/recall, AUROC, AUPRC and regression errors; choose a metric for the biological question.
+## Biology-to-AI Innovation Challenge (35%)
 
-**Class B:** Grouped cross-validation, tuning on validation data, calibration and subject-level bootstrap uncertainty. Distinguish discrimination from usefulness.
+Teams of two or three follow: **biological mechanism → computational hypothesis → implementation → baseline and ablation → evidence and limitations**. Publication-level novelty is not expected. A rigorous negative result is a valid scientific outcome.
 
-**Studio:** Evaluate a baseline and a tree model under identical splits; write a falsifiable capstone hypothesis and an evaluation plan.
+- **Memory & Adaptation:** Biological starting point: Neural or immune memory as biological inspiration. Approach: Implement a memory/replay or stabilization rule. Compare with sequential fine-tuning and a simple replay baseline under equal data and compute. Decisive test: Ablate the memory component; report retention and adaptation.
+- **Homeostasis & Robustness:** Biological starting point: Negative feedback in biological regulation. Approach: Implement a feedback-inspired correction or constraint. Compare with an unconstrained model and test perturbations. Decisive test: Ablate the feedback term; test stability and model mismatch.
+- **Selective Sensing:** Biological starting point: Biological sensory gating or selective attention as inspiration. Approach: Turn a selective-attention hypothesis into a budgeted measurement policy. Compare with periodic and random sensing. Decisive test: Ablate the selection rule at matched sensing cost.
+- **Organization & Generalization:** Biological starting point: Modularity or invariance in biological organization. Approach: Implement a modular or invariant representation motivated by a specific phenomenon. Compare with an unstructured model. Decisive test: Remove the proposed structure and evaluate held-out contexts.
 
-**Preparation:** ISLP: resampling and tree-based methods; scikit-learn: common pitfalls.
+**Project milestones:** Week 5 proposal (5%); Week 8 baseline (5%); Week 11 mechanism test (10%); Week 13 reproducible report (10%); Week 14 presentation and individual defense (5%).
 
-**Due / checkpoint:** Capstone proposal (5% of course grade): question, mechanism, baseline, split, metric and data/compute plan.
+**Capstone requirement:** A Biology-to-AI capstone must state the biological source, justify the computational abstraction, implement a change and ablate it. An AI application to biomedical data alone does not satisfy this requirement.
 
-### Week 06 — Biological dynamics and feedback
+## Grading
 
-**Module:** Biology → AI
+| Component | Course grade |
+| --- | ---: |
+| Four laboratories | 40% |
+| Four individual concept checks | 20% |
+| Staged capstone | 35% |
+| Participation and peer review | 5% |
+| **Total** | **100%** |
 
-**Guiding question:** When do biological relationships become computational constraints?
+## Practical teaching and academic integrity
 
-**Class A:** States versus observations; differential equations, equilibrium and local stability. Use a simplified gene-regulation model as a teaching example.
+Assignments use small, CPU-friendly Python, NumPy, pandas, matplotlib, scikit-learn and PyTorch notebooks. Generative AI may be used for coding/explanation with disclosure and independent verification, but not in individual knowledge checks or oral defenses. No restricted data may be uploaded to external services. Students document code environments, versions, data provenance, licenses, random seeds and split manifests. Each student must be able to explain the submitted work. Accessibility and institutional policies will be specified for an actual course offering.
 
-**Class B:** Negative feedback, adaptation and time scales; translate a mechanism into a model component, constraint or testable prediction.
+## Assigned and suggested resources
 
-**Studio:** Start Lab 2: simulate gene expression with degradation and negative feedback; apply step disturbances and parameter changes.
+- **Core ML:** [An Introduction to Statistical Learning with Applications in Python](https://www.statlearning.com/). James, Witten, Hastie, Tibshirani & Taylor. Statistical learning, evaluation and Python laboratories.
+- **Debugging:** [scikit-learn: Common pitfalls and recommended practices](https://scikit-learn.org/stable/common_pitfalls.html). Official guide to leakage, preprocessing, splitting and reproducibility.
+- **Implementation:** [PyTorch: Learn the Basics](https://docs.pytorch.org/tutorials/beginner/basics/intro.html). Official tutorials for tensors, autograd, optimization and model building.
+- **Biological theory:** An Introduction to Systems Biology: Design Principles of Biological Circuits. Uri Alon. Selected sections on negative feedback, regulatory circuits and biological design principles.
+- **Research paper:** [Overcoming catastrophic forgetting in neural networks](https://arxiv.org/abs/1612.00796). Kirkpatrick et al. (2017). Research discussion on continual learning and the limits of biological analogy.
+- **State estimation:** Bayesian Filtering and Smoothing. Simo Särkkä and Lennart Svensson. Selected sections on state-space models and filtering.
+- **Real-world data:** [PTB-XL ECG Dataset (PhysioNet)](https://physionet.org/content/ptb-xl/1.0.3/). Optional authentic-data exercise; respect license, patient-level folds and citation instructions.
 
-**Preparation:** ISLP: regression review. Preparation: derive dx/dt = production(x, u) − degradation(x) and inspect its equilibria.
+## Demonstration artifact
 
-**Due / checkpoint:** Concept check 2 (5%): states, observations and feedback.
-
-### Week 07 — Learning with mechanistic structure
-
-**Module:** Biology → AI
-
-**Guiding question:** Does adding biological knowledge improve the right thing?
-
-**Class A:** Compare black-box, mechanistic and hybrid models; encode bounds, conservation or temporal smoothness only when scientifically justified.
-
-**Class B:** Identifiability, model mismatch and ablation: distinguish a useful inductive bias from a correct biological explanation.
-
-**Studio:** Complete Lab 2: fit model parameters to noisy simulated trajectories; compare feedback/no-feedback systems and test an incorrect prior.
-
-**Preparation:** ISLP: regularization and model selection. Revisit the gene-regulation equations from Week 6.
-
-**Due / checkpoint:** Lab 2 (10%): gene feedback model, disturbance response and model-mismatch analysis.
-
-### Week 08 — Representations across biological scales
-
-**Module:** Biology → AI
-
-**Guiding question:** What information should a representation keep?
-
-**Class A:** PCA, clustering and autoencoders; representations for molecular measurements, biomedical images, neural/behavioral signals and physiology.
-
-**Class B:** CNNs, temporal models and self-supervised learning at a conceptual level. Match architecture and augmentations to the measurement process.
-
-**Studio:** Compare features and learned representations on a small synthetic multimodal dataset; test a nuisance-variable ablation.
-
-**Preparation:** ISLP: unsupervised learning and deep learning; PyTorch: model building.
-
-**Due / checkpoint:** Capstone baseline reproduction (5%): runnable baseline, split manifest and initial failure analysis.
-
-### Week 09 — Learning in an evolving environment
-
-**Module:** Biology → AI
-
-**Guiding question:** How can a learner adapt without losing what it knew?
-
-**Class A:** Distribution shift, continual learning, catastrophic forgetting and stability/plasticity. Relate adaptation to biological learning with explicit limits.
-
-**Class B:** Frozen models, fine-tuning and replay; temporal evaluation and retention/adaptation tradeoffs under a matched compute budget.
-
-**Studio:** Start Lab 3: train on sequential synthetic environments; measure performance on both old and new environments after each update.
-
-**Preparation:** Kirkpatrick et al.: Overcoming catastrophic forgetting in neural networks (author preprint).
-
-**Due / checkpoint:** Concept check 3 (5%): representation, shift and forgetting.
-
-### Week 10 — Personalization, behavior and context
-
-**Module:** AI → Biology
-
-**Guiding question:** Is the model detecting a state or a change in context?
-
-**Class A:** Between-person variation, within-person change, context confounding and cognitive/behavioral proxy labels; limits of latent-state interpretation.
-
-**Class B:** Population versus personalized models; separate a calibration period from future evaluation. Examine subgroup errors and missing modalities.
-
-**Studio:** Complete Lab 3: compare frozen, fine-tuned and replay learners; stress-test a context shortcut and quantify forgetting.
-
-**Preparation:** Kirkpatrick et al.: revisit evaluation; scikit-learn: leakage and randomness.
-
-**Due / checkpoint:** Lab 3 (10%): adaptation/retention curves, context stress test and compute accounting.
-
-### Week 11 — A mini digital twin as a scientific model
-
-**Module:** AI → Biology
-
-**Guiding question:** Which hidden states can our measurements actually identify?
-
-**Class A:** Define a digital twin operationally: a personalized dynamical model updated by observations. Separate this from a generic predictor.
-
-**Class B:** State-space models, filtering, observation models and uncertainty; observability and sensor placement in a simplified human–environment system.
-
-**Studio:** Start Lab 4: simulate hidden physiological states and noisy sensors; implement a linear Kalman-filter baseline and compare with direct regression.
-
-**Preparation:** PyTorch: implementation reference if needed. Preparation: derive the linear state and observation equations and one filtering update.
-
-**Due / checkpoint:** Capstone mechanism test (10%): controlled ablation, sensitivity analysis and claim–evidence table.
-
-### Week 12 — Measure, predict, decide
-
-**Module:** AI → Biology
-
-**Guiding question:** When should an intelligent system ask for another measurement?
-
-**Class A:** Active sensing, missing observations, measurement cost and uncertainty-aware decisions; compare periodic and uncertainty-triggered sampling.
-
-**Class B:** Prediction versus intervention; causal assumptions, counterfactual limits and why simulator success does not establish clinical benefit.
-
-**Studio:** Complete Lab 4: compare state-estimation error, uncertainty coverage and sensing cost at matched budgets; introduce sensor failure or model mismatch.
-
-**Preparation:** scikit-learn: evaluation pitfalls. Revisit Week 11 state-space equations and assumptions.
-
-**Due / checkpoint:** Lab 4 (10%): mini twin and sensing policy. Concept check 4 (5%): state estimation and causal limits.
-
-### Week 13 — Trustworthy biological AI
-
-**Module:** Synthesis
-
-**Guiding question:** Can someone else reproduce and challenge your result?
-
-**Class A:** Interpretation versus explanation; uncertainty, bias, privacy, responsible data use and limits of scientific claims.
-
-**Class B:** Foundation models and generative assistants: transfer, retrieval and generated hypotheses; inspect hallucination, contamination and unsupported conclusions.
-
-**Studio:** Peer audit: run another team’s instructions, challenge a shortcut, inspect citations and write a reproducibility review.
-
-**Preparation:** scikit-learn: common pitfalls; reread the source documentation for the capstone dataset and methods.
-
-**Due / checkpoint:** Capstone report and reproducible artifact (10%): six-page report plus code, environment, data provenance and limitations.
-
-### Week 14 — Biology-to-AI Innovation Challenge
-
-**Module:** Synthesis
-
-**Guiding question:** What did the experiment teach us about both biology and AI?
-
-**Class A:** Team presentations: biological motivation → computational hypothesis → controlled evidence → boundary of the claim.
-
-**Class B:** Individual oral defense and reflection: explain a model failure, an alternative explanation and the next informative experiment.
-
-**Studio:** Capstone symposium and cross-disciplinary review. A well-supported negative result is a valid contribution.
-
-**Preparation:** Peer project reports and method/dataset references; no new required reading.
-
-**Due / checkpoint:** Presentation and individual defense (5%). Submit a final contribution statement.
-
-## Laboratory briefs
-
-### Lab 01 — Train and Debug Your First Neural Network
-
-Weeks 3–4 · 10%
-
-**Data:** Synthetic labeled measurements with repeated subjects.
-
-**Build:** Implement a two-layer network, check a gradient numerically, and compare with a linear baseline and a PyTorch implementation.
-
-**Test and debug:** Diagnose three planted failures: a bad learning rate, an incorrect label mapping and preprocessing leakage. Include before/after evidence and a held-out evaluation.
-
-**Deliver:** Network notebook; loss/gradient plots; split manifest; a two-page debugging dossier.
-
-### Lab 02 — Build a Gene Feedback Controller
-
-Weeks 6–7 · 10%
-
-**Data:** Simulated gene-expression trajectories with known parameters.
-
-**Build:** Simulate negative feedback, fit parameters from noisy observations and compare disturbance recovery with a no-feedback model.
-
-**Test and debug:** Vary time step, measurement noise and parameter values. Compare a correct constraint with a deliberately misspecified one; avoid interpreting the toy system as a validated cell model.
-
-**Deliver:** Equations and assumptions; simulation code; recovery/stability plots; parameter and mismatch analysis.
-
-### Lab 03 — Learn from an Evolving Environment
-
-Weeks 9–10 · 10%
-
-**Data:** Sequential synthetic environments with controlled context shifts.
-
-**Build:** Compare a frozen model, sequential fine-tuning and a replay baseline using the same architecture and data budget.
-
-**Test and debug:** Evaluate old and new environments after every update; report multiple seeds, adaptation, forgetting, context shortcuts and training cost.
-
-**Deliver:** Learning curves by environment; method comparison; failure analysis; a reproducible experiment configuration.
-
-### Lab 04 — Build a Mini Human Digital Twin
-
-Weeks 11–12 · 10%
-
-**Data:** Synthetic physiological states, contextual inputs and noisy sensor readings.
-
-**Build:** Estimate hidden states with a linear filtering baseline; compare fixed-rate sensing with an uncertainty-triggered measurement policy.
-
-**Test and debug:** Use matched measurement budgets and unseen trajectories. Report state error, interval coverage and measurement cost; stress-test sensor dropout and model mismatch.
-
-**Deliver:** State/observation equations; estimator and sensing policy; error–cost analysis; a limitations statement.
-
-## Capstone: Biology-to-AI Innovation Challenge
-
-Each team translates a biological mechanism or human–environment interaction into a falsifiable computational hypothesis. Define what changes in the algorithm, what comparison tests that change, and what outcome would disconfirm the hypothesis. A rigorous negative result receives full consideration; publication-level novelty is not required.
-
-### Suggested tracks
-
-**Adaptation and memory:** Does a biologically motivated memory or regularization rule improve retention after a context shift? Compare against fine-tuning and a simple replay baseline; ablate the proposed mechanism and match data/compute.
-
-**Feedback and robustness:** Can a justified feedback constraint improve robustness to a disturbance without concealing model mismatch? Use a transparent synthetic system; compare unconstrained and constrained models and perturb the assumed mechanism.
-
-**Context and hidden states:** Does context improve estimation of a hidden state, or merely create a shortcut? Use held-out subjects or environments and a context-scrambling control; distinguish state estimation from diagnosis.
-
-**Active measurement:** Can adaptive sensing reduce measurement cost while preserving estimation quality? Compare with periodic and random sampling at matched budgets; report uncertainty, failure modes and cost.
-
-### Milestones and grading
-
-| Due | Deliverable | Course weight |
-| --- | --- | ---: |
-| Week 5 | One-page proposal with hypothesis, baseline, data, evaluation and feasibility | 5% |
-| Week 8 | Baseline reproduction with runnable code and failure analysis | 5% |
-| Week 11 | Mechanism ablation and controlled experiment with uncertainty | 10% |
-| Week 13 | Six-page report and reproducible artifact | 10% |
-| Week 14 | Presentation, individual defense and contribution statement | 5% |
-
-The report includes motivation, mechanism-to-algorithm mapping, methods, data provenance, evaluation, at least one ablation, results, limitations and the next informative experiment. References and a brief reproducibility appendix are outside the six-page limit. Submit a README, environment specification, split manifest and commands sufficient to reproduce the central result. Claims about causal mechanisms or clinical benefit require evidence beyond predictive performance or simulator results.
-
-## Readings and data
-
-- **[An Introduction to Statistical Learning with Applications in Python](https://www.statlearning.com/)** — James, Witten, Hastie, Tibshirani & Taylor (2023). Selected chapters and Python labs; the core statistical learning reference.
-
-- **[scikit-learn: common pitfalls and recommended practices](https://scikit-learn.org/stable/common_pitfalls.html)** — Official documentation on preprocessing, leakage and reproducibility. Read alongside every modeling assignment.
-
-- **[PyTorch: Learn the Basics](https://docs.pytorch.org/tutorials/beginner/basics/intro.html)** — Official tutorials for tensors, datasets, autograd, optimization and saving models. Use small CPU-friendly networks.
-
-- **[Overcoming catastrophic forgetting in neural networks](https://arxiv.org/abs/1612.00796)** — Kirkpatrick et al., PNAS (2017), DOI: 10.1073/pnas.1611835114. Author preprint linked here; discuss retention, adaptation and limits of biological analogies.
-
-- **[PTB-XL, version 1.0.3](https://physionet.org/content/ptb-xl/1.0.3/)** — Wagner et al., PhysioNet (2022). Optional ECG project dataset. Follow patient-level folds and the source license; cite both the dataset and its Scientific Data descriptor (2020).
+`assets/subject_leakage_demo.ipynb` is an executed synthetic example of how repeated participant-level measurements can lead to data leakage under random sample splitting. No patient data or student results are represented. It uses seed 42, 300 simulated participants and six readings per participant. It is teaching material rather than an estimate of real-world clinical performance.
 
 ## Material availability
 
-This release contains the complete proposed syllabus and laboratory/project specifications. Lecture slides, recordings, starter notebooks, solutions and student results are not part of this release. Public reading links remain subject to their publishers’ and authors’ terms.
+This proposed course includes syllabus, laboratory and project specifications, and one reproducible synthetic debugging example. Slides, recordings, comprehensive starter notebooks, solutions and student outcome data have not been produced for an actual offering.
