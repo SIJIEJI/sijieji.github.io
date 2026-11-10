@@ -42,6 +42,7 @@
         .image-swap .hover-img { position: absolute; top: 0; left: 0; opacity: 0; }
         .image-swap:hover .base-img { opacity: 0; }
         .image-swap:hover .hover-img { opacity: 1; }
+        .news-entry[hidden], #toggle-news-btn[hidden] { display: none !important; }
     </style>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap">
@@ -259,324 +260,337 @@
 </section>
 
 
-    <!-- News Section -->
-    <section class="border-y bg-white border-stone-200 pt-16 pb-16">
-        <div class="max-w-4xl mx-auto px-6">
-    <div class="flex items-center gap-3 mb-8">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-stone-900" style="" data-icon-set="lucide" data-lucide="bell">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.268 21a2 2 0 0 0 3.464 0m-10.47-5.674A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326">
-            </path>
-        </svg>
-        <h3 class="text-2xl font-semibold text-stone-900 tracking-tight">News</h3>
-    </div>
-<div class="space-y-4">
-
-
-    <div class="space-y-4 relative">
-        <ul id="news-list" class="space-y-4">
-            <!-- News Items -->
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[9/26]</span>
-                <span class="">Our paper, <strong>Act&middot;ONOMY</strong>, a hierarchical taxonomy for interpreting agent behavior, has been accepted to NeurIPS 2026.</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[9/26]</span>
-                <span class="">Gave a guest lecture in DATA 890 (graduate-level) at the University of North Carolina at Chapel Hill.</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[8/26]</span>
-                <span class="">Our paper on LLM for wireless communication has been accepted to EMNLP. Congrats to Yiwei!</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[8/26]</span>
-                <span class="">Invited to serve as Publicity Chair for BuildSys'27. We welcome your paper submissions!</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[7/26]</span>
-                <span class="">We are organizing the <a href="https://iab-agents.github.io/" target="_blank" rel="noopener noreferrer"><strong>Interpreting Agent Behavior workshop</strong></a> @ NeurIPS 2026. We welcome your paper submissions!</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[7/26]</span>
-                <span class="">Invited to serve as a TPC member of MobiCom 2027. We welcome your submissions!</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[6/26]</span>
-                <span class="">Gave an invited talk at the NSF Athena AI Institute's Athena Seminar Series at Duke University.</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[5/26]</span>
-                <span class="">Our paper has been accepted in principle by <strong>Nature Sensors</strong>. Congratulations to all collaborators!</span>
-             </li>
-
-			 <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[4/26]</span>
-                <span class="">Our work on Spiking Neural Networks for mmWave Sensing has been accepted to ICML. Congrats to the team!</span>
-             </li>
-
-			         <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[4/26]</span>
-                <span class=""> We are co-organizing the
+    <!-- News Section: category filters and accessible archive -->
+    <section class="border-y bg-white border-stone-200 pt-16 pb-16" id="news" aria-labelledby="news-heading">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="flex items-center gap-3 mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-stone-900" data-icon-set="lucide" data-lucide="bell" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.268 21a2 2 0 0 0 3.464 0m-10.47-5.674A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+          </svg>
+          <h3 id="news-heading" class="text-2xl font-semibold text-stone-900 tracking-tight">News &amp; Highlights</h3>
+        </div>
+        <p class="text-sm text-stone-500 mb-6">Research updates, academic leadership, honors, invited talks, and career milestones.</p>
+        <div class="flex flex-wrap gap-2 mb-5" role="group" aria-label="Filter news by category">
+          <button type="button" data-news-filter="All" aria-pressed="true" class="news-filter px-3 py-1.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700 bg-stone-900 border-stone-900 text-white">All</button>
+<button type="button" data-news-filter="Research" aria-pressed="false" class="news-filter px-3 py-1.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700 bg-white border-stone-200 text-stone-600 hover:border-stone-500 hover:text-stone-900">Research</button>
+<button type="button" data-news-filter="Leadership" aria-pressed="false" class="news-filter px-3 py-1.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700 bg-white border-stone-200 text-stone-600 hover:border-stone-500 hover:text-stone-900">Leadership</button>
+<button type="button" data-news-filter="Honors" aria-pressed="false" class="news-filter px-3 py-1.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700 bg-white border-stone-200 text-stone-600 hover:border-stone-500 hover:text-stone-900">Honors</button>
+<button type="button" data-news-filter="Talks" aria-pressed="false" class="news-filter px-3 py-1.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700 bg-white border-stone-200 text-stone-600 hover:border-stone-500 hover:text-stone-900">Talks</button>
+<button type="button" data-news-filter="Milestones" aria-pressed="false" class="news-filter px-3 py-1.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700 bg-white border-stone-200 text-stone-600 hover:border-stone-500 hover:text-stone-900">Milestones</button>
+        </div>
+        <ul id="news-list" class="border-t border-stone-200" aria-live="polite">
+          <li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[9/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Our paper, <strong>Act&middot;ONOMY</strong>, a hierarchical taxonomy for interpreting agent behavior, has been accepted to NeurIPS 2026.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[9/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Gave a guest lecture in DATA 890 (graduate-level) at the University of North Carolina at Chapel Hill.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[8/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Our paper on LLM for wireless communication has been accepted to EMNLP. Congrats to Yiwei!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[8/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Invited to serve as Publicity Chair for BuildSys'27. We welcome your paper submissions!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[7/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">We are organizing the <a href="https://iab-agents.github.io/" target="_blank" rel="noopener noreferrer"><strong>Interpreting Agent Behavior workshop</strong></a> @ NeurIPS 2026. We welcome your paper submissions!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[7/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Invited to serve as a TPC member of MobiCom 2027. We welcome your submissions!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[6/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Gave an invited talk at the NSF Athena AI Institute's Athena Seminar Series at Duke University.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[5/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Our paper has been accepted in principle by <strong>Nature Sensors</strong>. Congratulations to all collaborators!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[4/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Our work on Spiking Neural Networks for mmWave Sensing has been accepted to ICML. Congrats to the team!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[4/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class=""> We are co-organizing the
     <a href="https://humansys-workshop.github.io/2026/" target="_blank" rel="noopener noreferrer"><strong>HumanSys</a></strong>
     and
     <a href="https://mobidx.health/" target="_blank" rel="noopener noreferrer"><strong>MobiDx</a></strong>
     workshops at MobiCom 2026. We warmly welcome submissions!
-</span>
-             </li>
-
-        </ul>
-        <ul id="more-news" class="space-y-4 hidden">
-             
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[3/26]</span>
-                <span class="">Selected as <a href="https://mhti.md2k.org/">NIH mHealth Training Institute Scholar</a></span>
-             </li>
-
-			    <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[2/26]</span>
-                <span class="">Our work, AquaCode, which turns transaction platforms into non-invasive liquid quality checkers, is accepted to MobiSys 2026!</span>
-             </li>
-             <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[1/26]</span>
-                <span class="">Papers are accepted by IEEE TMC & ICASSP 2026. Congrats to the team!</span>
-             </li>
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[1/26]</span>
-                <span class="">Give a guest lecture, CSE 5360 Artificial Intelligence (Graduate-level), at the University of Texas at Arlington.</span>
-            </li>
-             <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[11/25]</span>
-                <span class="">Invited to serve as TPC member of <a href="https://esweek.org/emsoft_cfp/"><strong>EMSOFT 2026</a></strong>.</span>
-            </li>
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[09/25]</span>
-                <span class="">GSRF is accepted by NeurIPS 2025 as a spotlight (~3.19%). Congrats to Kang! See you in SD!</span>
-            </li>
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/25]</span>
-                <span class="">Papers are accepted by IEEE TMC & ACM MM. Congrats to Xinzhe and Sheng!</span>
-            </li>
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/25]</span>
-                <span class="">Invited to serve as TPC member of <a href="https://sensys.acm.org/2026/"><strong>Sensys 2026</strong></a>. Welcome to submit papers!</span>
-            </li>
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[05/25]</span>
-                <span class="">LLM + Mental Health papers are accepted by SenSys (poster), ACL 2025. Congrats to the team!</span>
-            </li>
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[05/25]</span>
-                <span class="">Invited to serve as TPC member of MobiCom Demo, MobiCom Poster and BodySys 2025.</span>
-            </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/25]</span>
-                    <span class="">Invited to serve as a co-Chair for <a href="https://buildsys.acm.org/2025/"><strong>BuildSys 2025</strong></a>.</span>
-                </li>
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/25]</span>
-                    <span class="">Papers accepted to ACM IMWUT / Ubicomp, IEEE Comm Mag, ICC. Congrats to Luca, Senthil and Man!</span>
-                </li>
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[02/25]</span>
-                    <span class="">Invited to serve as TPC member of EMSOFT, ESWeek'25.</span>
-                </li>
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/25]</span>
-                    <span class="">Give an invited seminar at UC Merced.</span>
-                </li>
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/25]</span>
-                    <span class="">NeurIT is accepted by ICRA 2025. Congrats to Xinzhe!</span>
-                </li>
-
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[12/24]</span>
-                    <span>Invited to serve as a TPC member of FMSys 2025 and Shadow TPC of CoNEXT 2025.</span>
-                </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[11/24]</span>
-                    <span class="inline-flex items-center gap-2">
+</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[3/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Selected as <a href="https://mhti.md2k.org/">NIH mHealth Training Institute Scholar</a></span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[2/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Our work, AquaCode, which turns transaction platforms into non-invasive liquid quality checkers, is accepted to MobiSys 2026!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[1/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Papers are accepted by IEEE TMC & ICASSP 2026. Congrats to the team!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[1/26]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Give a guest lecture, CSE 5360 Artificial Intelligence (Graduate-level), at the University of Texas at Arlington.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[11/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Invited to serve as TPC member of <a href="https://esweek.org/emsoft_cfp/"><strong>EMSOFT 2026</a></strong>.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[09/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">GSRF is accepted by NeurIPS 2025 as a spotlight (~3.19%). Congrats to Kang! See you in SD!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Papers are accepted by IEEE TMC & ACM MM. Congrats to Xinzhe and Sheng!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Invited to serve as TPC member of <a href="https://sensys.acm.org/2026/"><strong>Sensys 2026</strong></a>. Welcome to submit papers!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[05/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">LLM + Mental Health papers are accepted by SenSys (poster), ACL 2025. Congrats to the team!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[05/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Invited to serve as TPC member of MobiCom Demo, MobiCom Poster and BodySys 2025.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Invited to serve as a co-Chair for <a href="https://buildsys.acm.org/2025/"><strong>BuildSys 2025</strong></a>.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Papers accepted to ACM IMWUT / Ubicomp, IEEE Comm Mag, ICC. Congrats to Luca, Senthil and Man!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[02/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Invited to serve as TPC member of EMSOFT, ESWeek'25.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Give an invited seminar at UC Merced.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/25]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">NeurIT is accepted by ICRA 2025. Congrats to Xinzhe!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[12/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>Invited to serve as a TPC member of FMSys 2025 and Shadow TPC of CoNEXT 2025.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[11/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="inline-flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="4" width="18" height="18" rx="2"></rect>
                             <path d="M16 2v4M8 2v4M3 10h18"></path>
                         </svg>
                         <span>We are organizing <a href="https://humansys-workshop.github.io/WS/2025/index.html"><strong>HumanSys 2025</strong></a>.</span>
-                    </span>
-                </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/24]</span>
-                    <span>Invited to serve as a TPC member of <a href="https://www.sigmobile.org/mobisys/2025/"><strong>MobiSys 2025</strong></a>.</span>
-                </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/24]</span>
-                    <span>Gave an invited talk at Peking University.</span>
-                </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/24]</span>
-                    <span>RS-BNN is accepted by IEEE TVT.</span>
-                </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/24]</span>
-                    <span>Invited to serve as a TPC member of ICPADS 2024 and a session chair of ICDCS 2024. See you in NYC!</span>
-                </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/24]</span>
-                    <span>MuSAC is accepted by ICDCS 2024.</span>
-                </li>
-
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/24]</span>
-                    <span>Selected as a CPS Rising Star.</span>
-                    </li>
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                    <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/24]</span>
-                    <span class="">Honored to join <a href="#" class="underline">Schmidt Science Fellows 2024 cohort!</a></span>
-                </li>
-                <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[02/24]</span>
-                <span>
+                    </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>Invited to serve as a TPC member of <a href="https://www.sigmobile.org/mobisys/2025/"><strong>MobiSys 2025</strong></a>.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>Gave an invited talk at Peking University.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>RS-BNN is accepted by IEEE TVT.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>Invited to serve as a TPC member of ICPADS 2024 and a session chair of ICDCS 2024. See you in NYC!</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>MuSAC is accepted by ICDCS 2024.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>Selected as a CPS Rising Star.</span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[04/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span class="">Honored to join <a href="#" class="underline">Schmidt Science Fellows 2024 cohort!</a></span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Leadership">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[02/24]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Invited to serve as Co-Chair for the
                 <a href="https://buildsys.acm.org/2024/doctoral_colloquium/">2024 SenSys/BuildSys Joint Ph.D. Forum</a>,
                 and as an AEC member for MobiCom 2024.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[12/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Leadership</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[12/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 BG-BERT is accepted by ICASSP 2024.
                 <a href="https://github.com/aiot-lab/BG-BERT#bg-bert">Code available</a>.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Selected for the N2Women Young Researcher Fellowship and organized the N2Women event at SenSys 2023.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 HandFi is accepted by SenSys 2023 and has been filed as a patent.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[09/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Milestones">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[09/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Joined HKU. Hit me up when you are in Hong Kong!
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[09/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Milestones</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[09/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Honored to be listed in the
                 <a href="https://www.scs.org.sg/awards/sg100wit/profile?id=326">Singapore 100 Women in Tech</a>.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[08/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[08/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Gave invited talks at Zhejiang University and Zhejiang Lab.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Milestones">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Spent a wonderful month at ShanghaiTech University.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Milestones</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Milestones">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Successfully defended my Ph.D. thesis.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/23]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Milestones</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/23]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 JPTS is accepted by ICC 2023.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[12/22]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[12/22]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Gave an invited Student Lecture Series talk on SiFall.
                 <a href="https://www.youtube.com/watch?v=v_8pVKWeCIo&t=114s">Video available</a>.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/22]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/22]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 SiFall is accepted by SenSys 2022.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/22]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Talks">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[01/22]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 Gave an invited Student Lecture Series talk on CLNet.
                 <a href="http://youtu.be/2VhMdyQfvgU">Video available</a>.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/21]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Talks</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[10/21]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 1st runner-up in the Masked Face Recognition Challenge, ICCV 2021.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/21]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Research">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[07/21]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 CLNet is accepted by IEEE Wireless Communications Letters.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/20]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Research</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[06/20]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 2nd runner-up in the AI Meets Beauty Challenge, ACM MM 2020.
-                </span>
-            </li>
-
-            <li class="flex gap-4 items-start text-sm text-stone-600">
-                <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[05/20]</span>
-                <span>
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
+<li class="news-entry flex items-start gap-3 py-3 border-b border-stone-100 last:border-0 text-sm text-stone-600" data-news-category="Honors">
+            <span class="font-bold text-stone-900 shrink-0 min-w-[60px]">[05/20]</span>
+            <div class="flex-1 min-w-0 leading-relaxed"><span>
                 2nd runner-up in the EmotioNet Challenge, CVPR 2020.
-                </span>
-            </li>
-
+                </span></div>
+            <span class="hidden sm:inline-block shrink-0 text-[10px] uppercase tracking-wider font-semibold text-stone-400 pt-0.5">Honors</span>
+          </li>
         </ul>
-
-        <button type="button" aria-expanded="false" aria-controls="more-news" class="uppercase hover:text-stone-600 hover:border-stone-600 transition-colors text-xs font-semibold text-stone-900 tracking-wider border-stone-900 border-b mt-4 pb-0.5" id="toggle-news-btn">Show More</button>
-    </div>
-</div>
+        <div class="mt-5 flex items-center gap-4">
+          <button type="button" aria-expanded="false" aria-controls="news-list" class="uppercase hover:text-stone-600 hover:border-stone-600 transition-colors text-xs font-semibold text-stone-900 tracking-wider border-stone-900 border-b pb-0.5" id="toggle-news-btn">Show More</button>
+          <span id="news-result-count" class="text-xs text-stone-400" role="status" aria-live="polite"></span>
+        </div>
+      </div>
     </section>
 
     <!-- Selected Publications (Work) -->
@@ -865,6 +879,21 @@
                     <h3 class="text-xl font-semibold text-stone-900">Academic Services</h3>
                 </div>
                 
+
+                <!-- Selected academic leadership: curated roles, full record retained below -->
+                <div class="rounded-2xl bg-stone-50 border border-stone-200 p-5 mb-7">
+                  <h4 class="uppercase text-xs font-bold text-stone-900 tracking-wider mb-4">Selected Academic Leadership</h4>
+                  <div class="space-y-4">
+                    <div>
+                      <p class="text-sm font-semibold text-stone-900 mb-1">Conference &amp; Workshop Leadership</p>
+                      <p class="text-sm leading-relaxed text-stone-600">HumanSys 2025 (General Co-Chair) &middot; HumanSys 2026 (TPC Co-Chair) &middot; BuildSys 2025 PhD Forum (Co-Chair)</p>
+                    </div>
+                    <div class="border-t border-stone-200 pt-3">
+                      <p class="text-sm font-semibold text-stone-900 mb-1">Technical Program Committees</p>
+                      <p class="text-sm leading-relaxed text-stone-600">MobiCom 2027 &middot; SenSys 2026 &middot; MobiSys 2025 &middot; EMSOFT 2025/2026</p>
+                    </div>
+                  </div>
+                </div>
                 <div class="space-y-6">
                      <div class="">
                         <h4 class="uppercase text-sm font-bold text-stone-900 tracking-wider mb-2">Organizer</h4>
@@ -1187,23 +1216,53 @@
         </div>
     </footer>
 
-    <!-- News Toggle Script -->
+    <!-- News filtering and archive (progressive enhancement: all items remain visible without JavaScript) -->
     <script>
-        const newsList = document.getElementById('news-list');
-        const hiddenNews = document.getElementById('more-news');
-        hiddenNews.prepend(...Array.from(newsList.children).slice(10));
-        document.getElementById('toggle-news-btn').addEventListener('click', function() {
-            const btn = this;
-            if (hiddenNews.classList.contains('hidden')) {
-                hiddenNews.classList.remove('hidden');
-                btn.textContent = 'Show Less';
-                btn.setAttribute('aria-expanded', 'true');
-            } else {
-                hiddenNews.classList.add('hidden');
-                btn.textContent = 'Show More';
-                btn.setAttribute('aria-expanded', 'false');
-            }
+      (function () {
+        const entries = Array.from(document.querySelectorAll('#news-list .news-entry'));
+        const filters = Array.from(document.querySelectorAll('[data-news-filter]'));
+        const toggle = document.getElementById('toggle-news-btn');
+        const count = document.getElementById('news-result-count');
+        const limit = 8;
+        let active = 'All';
+        let expanded = false;
+
+        function renderNews() {
+          const matching = entries.filter(item => active === 'All' || item.dataset.newsCategory === active);
+          const visibleCount = expanded ? matching.length : Math.min(limit, matching.length);
+          let seen = 0;
+          entries.forEach(item => {
+            const matches = active === 'All' || item.dataset.newsCategory === active;
+            if (matches) seen += 1;
+            item.hidden = !matches || (!expanded && seen > limit);
+          });
+          filters.forEach(btn => {
+            const selected = btn.dataset.newsFilter === active;
+            btn.setAttribute('aria-pressed', String(selected));
+            btn.classList.toggle('bg-stone-900', selected);
+            btn.classList.toggle('border-stone-900', selected);
+            btn.classList.toggle('text-white', selected);
+            btn.classList.toggle('bg-white', !selected);
+            btn.classList.toggle('border-stone-200', !selected);
+            btn.classList.toggle('text-stone-600', !selected);
+          });
+          toggle.hidden = matching.length <= limit;
+          toggle.textContent = expanded ? 'Show Less' : 'Show More (' + (matching.length - limit) + ')';
+          toggle.setAttribute('aria-expanded', String(expanded));
+          count.textContent = 'Showing ' + visibleCount + ' of ' + matching.length + ' updates';
+        }
+
+        filters.forEach(btn => btn.addEventListener('click', function () {
+          active = this.dataset.newsFilter;
+          expanded = false;
+          renderNews();
+        }));
+        toggle.addEventListener('click', function () {
+          expanded = !expanded;
+          renderNews();
         });
+        renderNews();
+      }());
     </script>
 
 </body></html>
